@@ -6,11 +6,20 @@ class Animal {
         this.fullness = 100;
         this.notThirstiness = 100;
         this.energy = 100;
+        this.description = "Whatever it is, it's definitely an animal.";
     }
+  
     play() {
         this.happiness += 10;
         this.energy -= 5;
         this.hunger -= 5;
         this.updateState();
+    }
+}
+
+class Giraffe extends Animal {
+    constructor (name) {
+        super(name);
+        this.description = "This long-necked leaf lover looms loftily."
     }
 }
