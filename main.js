@@ -21,6 +21,17 @@ class Animal {
         this.energy += 5;
         this.fullness -= 2;
     }
+
+    
+    healthDown() {
+        this.health -= 1;
+        console.log(this.health);
+    }
+
+    updateState() {
+        this.healthDown();
+        setTimeout(this.updateState.bind(this),1000);
+    }
 }
 
 class Giraffe extends Animal {
@@ -29,5 +40,12 @@ class Giraffe extends Animal {
         this.description = "This long-necked leaf lover looms loftily."
         this.eats = "Leaves";
     }
-
 }
+
+
+// Replace this with non-hardcoded values later
+const animal = new Animal("Gerry")
+
+console.log(animal.health);
+
+animal.updateState();
