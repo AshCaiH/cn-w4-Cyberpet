@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyberpet</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Zookeeper Tamagotchi</title>
+  </head>
+  <body>
+    <div class="tamagotchi-container">
+      <div class="animal-selection">
+        <label for="animal-name">Name your animal:</label>
+        <input type="text" id="pet-name" placeholder="Enter pet name" />
 
-    <link rel="stylesheet" href="./style.css">
-</head>
+        <label for="animal-choice">Choose your pet:</label>
+        <select id="animal-choice">
+          <option value="animal1">Owl</option>
+          <option value="animal2">Tiger</option>
+          <option value="animal3">Giraffe</option>
+        </select>
+      </div>
 
-<body>
-    
-</body>
+      <div class="tamagotchi-display">
+        <img src="#placeholder" alt="Tamagotchi" id="tamagotchi-character" />
+      </div>
 
-<script src="./main.js"></script>
+      <div class="tamagotchi-controls">
+        <button id="feed-button">Feed</button>
+        <button id="play-button">Play</button>
+        <button id="sleep-button">Sleep</button>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
 </html>
