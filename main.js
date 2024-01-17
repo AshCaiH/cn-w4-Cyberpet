@@ -9,6 +9,13 @@ class Animal {
         this.energy = 100;
         this.description = "Whatever it is, it's definitely an animal.";
     }
+
+    feed() {
+        this.hunger += 10;
+        this.happiness += 5;
+        this.energy -= 5;
+        this.updateState();
+    }
   
     play() {
         this.happiness += 10;
