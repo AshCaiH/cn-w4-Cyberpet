@@ -7,4 +7,10 @@ class Animal {
         this.notThirstiness = 100;
         this.energy = 100;
     }
+    play() {
+        this.happiness += 10;
+        this.energy -= 5;
+        this.hunger -= 5;
+        this.updateState();
+    }
 }
