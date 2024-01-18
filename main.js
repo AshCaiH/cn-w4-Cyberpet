@@ -1,4 +1,22 @@
 // Animal Classes
+let statusBars = [
+    {
+        value: "health"
+    },
+    {
+        value: "happiness"
+    },
+    {
+        value: "fullness"
+    },
+    {
+        value: "energy"
+    },
+] //document.getElementsByClassName("statusBar");
+
+class Animal {
+    constructor (name) {
+        this.statuses = ["idle", "sleeping", "eating", "playing"]
 
 class Animal {
     constructor(name) {
@@ -30,6 +48,30 @@ class Animal {
         this.energy += 5;
         this.fullness -= 2;
     }
+
+    
+    healthDown() {
+        this.health -= 3;
+    }
+
+    updateState() {
+        this.healthDown();
+        this.updateStatusBars();
+        setTimeout(this.updateState.bind(this),1000);
+    }
+
+    updateStatusBars() {
+        for (let bar of statusBars) {
+            let value = this[bar.value]; // Get the respective status value.
+            let pips = 10; // How many "pips" or "chunks" make up each bar?
+            let activePips = Math.ceil(value / 100 * pips); // Convert the status value into a pip count.
+            
+            let maxWidth = 50; // TODO: Replace this with numbers sourced from DOM.
+            let newWidth = maxWidth / pips * activePips; // Status bar matches respective value, snapping to pips.
+
+            console.log(newWidth);
+        }
+    }
 }
 
 class Cat extends Animal {
@@ -44,7 +86,6 @@ class Giraffe extends Animal {
         this.description = "This long-necked leaf lover looms loftily."
         this.eats = "Leaves";
     }
-
 }
 
 class Dog extends Animal {
@@ -115,3 +156,8 @@ document.getElementById("start-button").addEventListener("click", startGame);
 document.addEventListener("DOMContentLoaded", () => {
     updateAnimalDisplay(document.getElementById("animal-choice").value);
 });
+
+// Replace this with non-hardcoded values later
+const animal = new Animal("Gerry")
+
+animal.updateState();
