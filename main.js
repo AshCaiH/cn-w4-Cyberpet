@@ -6,18 +6,7 @@ class Animal {
   }
 }
 
-class Cat extends Animal {
-  constructor(name) {
-    super(name);
-    this.health = 100;
-    this.happiness = 100;
-    this.energy = 100;
-    this.hunger = 100;
-    this.thirst = 100;
-  }
-}
-
-class Dog extends Animal {
+class Monkey extends Animal {
   constructor(name) {
     super(name);
     this.health = 100;
@@ -39,18 +28,29 @@ class Turtle extends Animal {
   }
 }
 
+class Goose extends Animal {
+  constructor(name) {
+    super(name);
+    this.health = 100;
+    this.happiness = 100;
+    this.energy = 100;
+    this.hunger = 100;
+    this.thirst = 100;
+  }
+}
+
 let currentAnimal = null;
 
 // Animal Type
 
 const createAnimal = (name, type) => {
   switch (type) {
-    case "cat":
-      return new Cat(name);
-    case "dog":
-      return new Dog(name);
+    case "monkey":
+      return new Monkey(name);
     case "turtle":
       return new Turtle(name);
+    case "goose":
+      return new Goose(name);
   }
 };
 
