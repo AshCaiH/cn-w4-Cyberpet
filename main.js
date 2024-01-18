@@ -1,3 +1,18 @@
+let statusBars = [
+    {
+        value: "health"
+    },
+    {
+        value: "happiness"
+    },
+    {
+        value: "fullness"
+    },
+    {
+        value: "energy"
+    },
+] //document.getElementsByClassName("statusBar");
+
 class Animal {
     constructor (name) {
         this.statuses = ["idle", "sleeping", "eating", "playing"]
@@ -31,13 +46,26 @@ class Animal {
 
     
     healthDown() {
-        this.health -= 1;
-        console.log(this.health);
+        this.health -= 3;
     }
 
     updateState() {
         this.healthDown();
+        this.updateStatusBars();
         setTimeout(this.updateState.bind(this),1000);
+    }
+
+    updateStatusBars() {
+        for (let bar of statusBars) {
+            let value = this[bar.value]; // Get the respective status value.
+            let pips = 10; // How many "pips" or "chunks" make up each bar?
+            let activePips = Math.ceil(value / 100 * pips); // Convert the status value into a pip count.
+            
+            let maxWidth = 50; // TODO: Replace this with numbers sourced from DOM.
+            let newWidth = maxWidth / pips * activePips; // Status bar matches respective value, snapping to pips.
+
+            console.log(newWidth);
+        }
     }
 }
 
@@ -52,7 +80,5 @@ class Giraffe extends Animal {
 
 // Replace this with non-hardcoded values later
 const animal = new Animal("Gerry")
-
-console.log(animal.health);
 
 animal.updateState();
