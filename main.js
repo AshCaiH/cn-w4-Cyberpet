@@ -47,7 +47,8 @@ class Animal {
     }
 
     checkStat(stat) {
-        if (this[stat] == 0) {
+        if (this[stat] <= 0) {
+            this[stat] = 0;
             this.health -= 2;
         } else {
             this[stat] -= 5;
