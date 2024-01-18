@@ -36,5 +36,12 @@ class Giraffe extends Animal {
         this.description = "This long-necked leaf lover looms loftily."
         this.eats = "Leaves";
     }
+}
 
+class Turtle extends Animal {
+    constructor (name) {
+        super(name);
+        this.description = "This watchful wonder waits wisely"
+        this.eats = "Mice";
+    }
 }
