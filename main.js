@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Replace this with non-hardcoded values later
 const animal = new Animal("Gerry")
 
-// animal.updateState();
+animal.updateState();
 
 
 btn1.addEventListener("click", animal.feed.bind(animal));
