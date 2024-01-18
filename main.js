@@ -1,18 +1,5 @@
 // Animal Classes
-let statusBars = [
-    {
-        value: "health"
-    },
-    {
-        value: "happiness"
-    },
-    {
-        value: "fullness"
-    },
-    {
-        value: "energy"
-    },
-] //document.getElementsByClassName("statusBar");
+let statusBars = document.getElementsByClassName("progress-bar");
 
 class Animal {
     constructor(name) {
@@ -58,14 +45,14 @@ class Animal {
 
     updateStatusBars() {
         for (let bar of statusBars) {
-            let value = this[bar.value]; // Get the respective status value.
+            let value = this[bar.id]; // Get the respective status value.
             let pips = 10; // How many "pips" or "chunks" make up each bar?
             let activePips = Math.ceil(value / 100 * pips); // Convert the status value into a pip count.
             
-            let maxWidth = 50; // TODO: Replace this with numbers sourced from DOM.
-            let newWidth = maxWidth / pips * activePips; // Status bar matches respective value, snapping to pips.
+            let maxWidth = bar.style.maxWidth; // TODO: Replace this with numbers sourced from DOM.
+            bar.style.width = Math.ceil(75 / pips * activePips) + "px"; // Status bar matches respective value, snapping to pips.
 
-            console.log(newWidth);
+            console.log(bar.id, 75 / pips * activePips);
         }
     }
 }
