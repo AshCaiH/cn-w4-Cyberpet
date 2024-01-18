@@ -24,7 +24,7 @@ class Animal {
         this.happiness += 10;
         this.energy -= 5;
         this.fullness -= 5;
-        this.updateState();
+        this.updateStatusBars();
     }
 
     sleep () {
@@ -32,13 +32,26 @@ class Animal {
         this.fullness -= 2;
     }
 
-    
-    healthDown() {
-        this.health -= 3;
+    damageOverTime() {
+        let stats = ["happiness", "energy", "fullness", "thirst"];
+
+        for (let stat of stats) {
+            this.checkStat(stat);
+        }        
+    }
+
+    checkStat(stat) {
+        if (this[stat] == 0) {
+            this.health -= 2;
+        } else {
+            this[stat] -= 2;
+        }
+
+        console.log(stat, this[stat]);
     }
 
     updateState() {
-        this.healthDown();
+        this.damageOverTime();
         this.updateStatusBars();
         setTimeout(this.updateState.bind(this),1000);
     }
@@ -51,8 +64,6 @@ class Animal {
             
             let maxWidth = bar.style.maxWidth; // TODO: Replace this with numbers sourced from DOM.
             bar.style.width = Math.ceil(75 / pips * activePips) + "px"; // Status bar matches respective value, snapping to pips.
-
-            console.log(bar.id, 75 / pips * activePips);
         }
     }
 }
