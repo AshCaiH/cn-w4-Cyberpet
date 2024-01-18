@@ -1,26 +1,9 @@
 // Animal Classes
-let statusBars = [
-    {
-        value: "health"
-    },
-    {
-        value: "happiness"
-    },
-    {
-        value: "fullness"
-    },
-    {
-        value: "energy"
-    },
-] //document.getElementsByClassName("statusBar");
-
-class Animal {
-    constructor (name) {
-        this.statuses = ["idle", "sleeping", "eating", "playing"]
+let statusBars = document.getElementsByClassName("progress-bar");
 
 class Animal {
     constructor(name) {
-        super(name);
+        this.statuses = ["idle", "sleeping", "eating", "playing"]
         this.health = 100;
         this.happiness = 100;
         this.energy = 100;
@@ -41,7 +24,7 @@ class Animal {
         this.happiness += 10;
         this.energy -= 5;
         this.fullness -= 5;
-        this.updateState();
+        this.updateStatusBars();
     }
 
     sleep () {
@@ -49,27 +32,38 @@ class Animal {
         this.fullness -= 2;
     }
 
-    
-    healthDown() {
-        this.health -= 3;
+    damageOverTime() {
+        let stats = ["happiness", "energy", "fullness", "thirst"];
+
+        for (let stat of stats) {
+            this.checkStat(stat);
+        }        
+    }
+
+    checkStat(stat) {
+        if (this[stat] == 0) {
+            this.health -= 2;
+        } else {
+            this[stat] -= 2;
+        }
+
+        console.log(stat, this[stat]);
     }
 
     updateState() {
-        this.healthDown();
+        this.damageOverTime();
         this.updateStatusBars();
         setTimeout(this.updateState.bind(this),1000);
     }
 
     updateStatusBars() {
         for (let bar of statusBars) {
-            let value = this[bar.value]; // Get the respective status value.
+            let value = this[bar.id]; // Get the respective status value.
             let pips = 10; // How many "pips" or "chunks" make up each bar?
             let activePips = Math.ceil(value / 100 * pips); // Convert the status value into a pip count.
             
-            let maxWidth = 50; // TODO: Replace this with numbers sourced from DOM.
-            let newWidth = maxWidth / pips * activePips; // Status bar matches respective value, snapping to pips.
-
-            console.log(newWidth);
+            let maxWidth = bar.style.maxWidth; // TODO: Replace this with numbers sourced from DOM.
+            bar.style.width = Math.ceil(75 / pips * activePips) + "px"; // Status bar matches respective value, snapping to pips.
         }
     }
 }
