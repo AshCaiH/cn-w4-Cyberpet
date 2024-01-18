@@ -1,12 +1,6 @@
 // Animal Classes
 
 class Animal {
-  constructor(name) {
-    this.name = name;
-  }
-}
-
-class Cat extends Animal {
     constructor(name) {
         super(name);
         this.health = 100;
@@ -38,6 +32,12 @@ class Cat extends Animal {
     }
 }
 
+class Cat extends Animal {
+    constructor(name) {
+        super(name);
+    }
+}
+
 class Giraffe extends Animal {
     constructor (name) {
         super(name);
@@ -50,22 +50,12 @@ class Giraffe extends Animal {
 class Dog extends Animal {
     constructor(name) {
         super(name);
-        this.health = 100;
-        this.happiness = 100;
-        this.energy = 100;
-        this.hunger = 100;
-        this.thirst = 100;
     }
 }
 
 class Turtle extends Animal {
     constructor(name) {
         super(name);
-        this.health = 100;
-        this.happiness = 100;
-        this.energy = 100;
-        this.hunger = 100;
-        this.thirst = 100;
     }
 }
 
