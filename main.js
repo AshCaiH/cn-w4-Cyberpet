@@ -101,7 +101,7 @@ class Turtle extends Animal {
     }
 }
 
-let currentAnimal = null;
+let animal = null;
 
 // Animal Type
 
@@ -138,12 +138,19 @@ const startGame = () => {
         return;
     }
 
-    currentAnimal = createAnimal(name, type);
-    if (currentAnimal) {
+    animal = createAnimal(name, type);
+    if (animal) {
         document.querySelector(".animal-selection").classList.add("hidden");
         document.querySelector(".status-bars").classList.remove("hidden");
         document.getElementById("animal-name-display").textContent = name;
     }
+
+    animal.updateState();
+
+
+    btn1.addEventListener("click", animal.feed.bind(animal));
+    btn2.addEventListener("click", animal.play.bind(animal));
+    btn3.addEventListener("click", animal.sleep.bind(animal));
 };
 
 // Initialize Animal
@@ -159,11 +166,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Replace this with non-hardcoded values later
-const animal = new Animal("Gerry")
-
-animal.updateState();
-
-
-btn1.addEventListener("click", animal.feed.bind(animal));
-btn2.addEventListener("click", animal.play.bind(animal));
-btn3.addEventListener("click", animal.sleep.bind(animal));
