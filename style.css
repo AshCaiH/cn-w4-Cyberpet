@@ -133,9 +133,13 @@ body {
   /* flex-wrap: wrap; */
   align-items: center;
   justify-content: flex-start;
-  margin: 5px 10px;
+  margin: 5px 0px;
   width: 130px;  
   mix-blend-mode: screen;
+}
+
+.status-bar.odd {
+  flex-direction: row-reverse;
 }
 
 .status-bar label {
@@ -144,7 +148,7 @@ body {
   height: 26px;
   text-align: center;
   background-color: #757d65;
-  margin-right:6px;
+  margin: 0 6px;
 }
 
 .status-bar label i {
