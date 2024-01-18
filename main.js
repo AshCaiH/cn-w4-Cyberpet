@@ -1,6 +1,10 @@
 // Animal Classes
 let statusBars = document.getElementsByClassName("progress-bar");
 
+let btn1 = document.getElementById("feed-button");
+let btn2 = document.getElementById("play-button");
+let btn3 = document.getElementById("sleep-button");
+
 class Animal {
     constructor(name) {
         this.statuses = ["idle", "sleeping", "eating", "playing"]
@@ -15,9 +19,10 @@ class Animal {
 
     feed() {
         this.fullness += 10;
+        this.thirst += 3;
         this.happiness += 5;
-        this.energy -= 5;
-        this.updateState();
+        this.energy -= 2;
+        this.updateStatusBars();
     }
   
     play() {
@@ -28,8 +33,9 @@ class Animal {
     }
 
     sleep () {
-        this.energy += 5;
-        this.fullness -= 2;
+        this.energy += 10;
+        this.fullness -= 5;
+        this.updateStatusBars();
     }
 
     damageOverTime() {
@@ -44,10 +50,10 @@ class Animal {
         if (this[stat] == 0) {
             this.health -= 2;
         } else {
-            this[stat] -= 2;
+            this[stat] -= 5;
         }
 
-        console.log(stat, this[stat]);
+        // console.log(stat, this[stat]);
     }
 
     updateState() {
@@ -155,3 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const animal = new Animal("Gerry")
 
 animal.updateState();
+
+
+btn1.addEventListener("click", animal.feed.bind(animal));
+btn2.addEventListener("click", animal.play.bind(animal));
+btn3.addEventListener("click", animal.sleep.bind(animal));
