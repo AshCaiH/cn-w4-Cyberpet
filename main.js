@@ -15,12 +15,8 @@ let statusBars = [
 ] //document.getElementsByClassName("statusBar");
 
 class Animal {
-    constructor (name) {
-        this.statuses = ["idle", "sleeping", "eating", "playing"]
-
-class Animal {
     constructor(name) {
-        super(name);
+        this.statuses = ["idle", "sleeping", "eating", "playing"]
         this.health = 100;
         this.happiness = 100;
         this.energy = 100;
