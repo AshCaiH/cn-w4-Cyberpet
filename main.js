@@ -148,8 +148,6 @@ class Monkey extends Animal {
 class Goose extends Animal {
     constructor (name) {
         super(name);
-        this.description = "This long-necked leaf lover looms loftily."
-        this.eats = "Leaves";
     }
 }
 
@@ -157,12 +155,6 @@ class Turtle extends Animal {
     constructor(name) {
         super(name);
     }
-}
-
-class Goose extends Animal {
-  constructor(name) {
-    super(name);
-  }
 }
 
 let animal = null;
