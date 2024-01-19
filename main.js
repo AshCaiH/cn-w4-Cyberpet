@@ -84,7 +84,7 @@ class Animal {
     }
 }
 
-class Cat extends Animal {
+class Monkey extends Animal {
     constructor(name) {
         super(name);
     }
@@ -110,8 +110,8 @@ let animal = null;
 
 const createAnimal = (name, type) => {
     switch (type) {
-        case "cat":
-            return new Cat(name);
+        case "monkey":
+            return new monkey(name);
         case "goose":
             return new Goose(name);
         case "turtle":
