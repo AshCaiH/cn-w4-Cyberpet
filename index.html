@@ -26,10 +26,10 @@
         </div>
         <div class="image-container">
           <div id="animal-name-display"></div>
-          <img src="imgs/cat.gif" alt="Tamagotchi" id="tamagotchi-character" />
+          <img src="imgs/monkey.gif" alt="Tamagotchi" id="tamagotchi-character" />
         </div>
         <div class="status-bars hidden">
-          <div class="status-bar">
+          <div class="status-bar odd">
             <label for="health"><i class="fa-solid fa-heart"></i></label>
             <div id="health" class="progress-bar"></div>
           </div>
@@ -37,24 +37,31 @@
             <label for="happiness"><i class="fa-solid fa-face-smile"></i></label>
             <div id="happiness" class="progress-bar"></div>
           </div>
-          <div class="status-bar">
+          <div class="status-bar odd">
             <label for="energy"><i class="fa-solid fa-bolt"></i></label>
             <div id="energy" class="progress-bar"></div>
           </div>
-          <div class="status-bar">
-            <label for="hunger"><i class="fa-solid fa-fish"></i></label>
-            <div id="hunger" class="progress-bar"></div>
+          <div class="status-bar ">
+            <label for="fullness"><i class="fa-solid fa-fish"></i></label>
+            <div id="fullness" class="progress-bar"></div>
           </div>
-          <div class="status-bar">
+          <div class="status-bar odd">
             <label for="thirst"><i class="fa-solid fa-droplet"></i></label>
             <div id="thirst" class="progress-bar"></div>
           </div>
-        </div>      
+          <div class="status-bar">
+            <!-- Dummy status bar to keep the 5th one left-aligned -->
+          </div>
+        </div>
+        <div id="game-over" class="hidden">
+          <p class="game-over-text"></p>
+          <p>Press any of the buttons below to try again.</p>
+        </div>
     </div>
     <div class="tamagotchi-controls">
-        <button id="feed-button">Feed</button>
-        <button id="play-button">Play</i></button>
-        <button id="sleep-button">Sleep</i></button>
+        <button id="feed-button" value="feed">Feed</button>
+        <button id="play-button" value="play">Play</button>
+        <button id="sleep-button" value="sleep">Sleep</button>
       </div>
     <script src="main.js"></script>
   </body>
