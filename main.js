@@ -31,7 +31,6 @@ class Animal {
     changeStat(statName, value) {
         let newValue = this.stat[statName] + value;
         this.stat[statName] = Math.max(0, Math.min(newValue, this.maxStat[statName]));
-        console.log(this.stat);
     }
 
     feed() {
@@ -91,17 +90,11 @@ class Cat extends Animal {
     }
 }
 
-class Giraffe extends Animal {
+class Goose extends Animal {
     constructor (name) {
         super(name);
         this.description = "This long-necked leaf lover looms loftily."
         this.eats = "Leaves";
-    }
-}
-
-class Dog extends Animal {
-    constructor(name) {
-        super(name);
     }
 }
 
@@ -119,8 +112,8 @@ const createAnimal = (name, type) => {
     switch (type) {
         case "cat":
             return new Cat(name);
-        case "dog":
-            return new Dog(name);
+        case "goose":
+            return new Goose(name);
         case "turtle":
             return new Turtle(name);
     }
