@@ -49,12 +49,16 @@
           <div class="status-bar">
             <!-- Dummy status bar to keep the 5th one left-aligned -->
           </div>
-        </div>      
+        </div>
+        <div id="game-over" class="hidden">
+          <p class="game-over-text"></p>
+          <p>Press any of the buttons below to try again.</p>
+        </div>
     </div>
     <div class="tamagotchi-controls">
-        <button id="feed-button">Feed</button>
-        <button id="play-button">Play</button>
-        <button id="sleep-button">Sleep</button>
+        <button id="feed-button" value="feed">Feed</button>
+        <button id="play-button" value="play">Play</button>
+        <button id="sleep-button" value="sleep">Sleep</button>
       </div>
     <script src="main.js"></script>
   </body>

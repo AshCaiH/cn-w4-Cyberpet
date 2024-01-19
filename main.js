@@ -11,8 +11,11 @@ class Animal {
 
         this.description = "Whatever it is, it's definitely an animal.";
 
+        this.gameOver = false;
+        this.score = 0;
+
         this.maxStat = {
-            health: 100,
+            health: 50,
             happiness: 100,
             energy: 100,
             fullness: 100,
@@ -21,10 +24,10 @@ class Animal {
 
         this.stat = {
             health: this.maxStat.health,
-            happiness: this.maxStat.health,
-            energy: this.maxStat.health,
-            fullness: this.maxStat.health,
-            thirst: this.maxStat.health
+            happiness: this.maxStat.happiness,
+            energy: this.maxStat.energy,
+            fullness: this.maxStat.fullness,
+            thirst: this.maxStat.thirst
         }
     }
 
@@ -34,6 +37,10 @@ class Animal {
     }
 
     feed() {
+        if (animal.gameOver) {
+            location.reload();
+            return;
+        }
         this.changeStat("fullness", 10);
         this.changeStat("thirst", 3);
         this.changeStat("happiness", 5);
@@ -41,6 +48,10 @@ class Animal {
     }
   
     play() {
+        if (animal.gameOver) {
+            location.reload();
+            return;
+        }
         this.changeStat("happiness", 10);
         this.changeStat("fullness", -5);
         this.changeStat("energy", -5);
@@ -48,6 +59,10 @@ class Animal {
     }
 
     sleep () {
+        if (animal.gameOver) {
+            location.reload();
+            return;
+        }
         this.changeStat("energy", 15);
         this.changeStat("fullness", -5);
         this.updateStatusBars();
@@ -67,16 +82,25 @@ class Animal {
     }
 
     updateState() {
+        this.score += 1;
         this.damageOverTime();
         this.updateStatusBars();
-        setTimeout(this.updateState.bind(this),1000);
+
+        if (this.stat.health <= 0 ) {
+
+            animal.gameOver = true;
+            document.querySelector(".game-over-text").textContent = `After lasting ${animal.score} seconds, your zoo has been closed and your one animal has been taken into protective custody.`
+            document.getElementById("game-over").classList.remove("hidden");
+            document.querySelector(".status-bars").classList.add("hidden");
+
+        } else setTimeout(this.updateState.bind(this),1000);
     }
 
     updateStatusBars() {
         for (let bar of statusBars) {
             let value = this.stat[bar.id]; // Get the respective status value.
             let pips = 10; // How many "pips" or "chunks" make up each bar?
-            let activePips = Math.ceil(value / 100 * pips); // Convert the status value into a pip count.
+            let activePips = Math.ceil(value / this.maxStat[bar.id] * pips); // Convert the status value into a pip count.
             
             let maxWidth = bar.style.maxWidth; // TODO: Replace this with numbers sourced from DOM.
             bar.style.width = Math.ceil(75 / pips * activePips) + "px"; // Status bar matches respective value, snapping to pips.
@@ -168,4 +192,3 @@ document.addEventListener("DOMContentLoaded", () => {
     updateAnimalDisplay(document.getElementById("animal-choice").value);
 });
 
-// Replace this with non-hardcoded values later
