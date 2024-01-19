@@ -8,33 +8,49 @@ let btn3 = document.getElementById("sleep-button");
 class Animal {
     constructor(name) {
         this.statuses = ["idle", "sleeping", "eating", "playing"]
-        this.health = 100;
-        this.happiness = 100;
-        this.energy = 100;
-        this.fullness = 100;
-        this.thirst = 100;
 
         this.description = "Whatever it is, it's definitely an animal.";
+
+        this.maxStat = {
+            health: 100,
+            happiness: 100,
+            energy: 100,
+            fullness: 100,
+            thirst: 100
+        }
+
+        this.stat = {
+            health: this.maxStat.health,
+            happiness: this.maxStat.health,
+            energy: this.maxStat.health,
+            fullness: this.maxStat.health,
+            thirst: this.maxStat.health
+        }
+    }
+
+    changeStat(statName, value) {
+        let newValue = this.stat[statName] + value;
+        this.stat[statName] = Math.max(0, Math.min(newValue, this.maxStat[statName]));
+        console.log(this.stat);
     }
 
     feed() {
-        this.fullness += 10;
-        this.thirst += 3;
-        this.happiness += 5;
-        this.energy -= 2;
+        this.changeStat("fullness", 10);
+        this.changeStat("thirst", 3);
+        this.changeStat("happiness", 5);
         this.updateStatusBars();
     }
   
     play() {
-        this.happiness += 10;
-        this.energy -= 5;
-        this.fullness -= 5;
+        this.changeStat("happiness", 10);
+        this.changeStat("fullness", -5);
+        this.changeStat("energy", -5);
         this.updateStatusBars();
     }
 
     sleep () {
-        this.energy += 10;
-        this.fullness -= 5;
+        this.changeStat("energy", 15);
+        this.changeStat("fullness", -5);
         this.updateStatusBars();
     }
 
@@ -42,19 +58,13 @@ class Animal {
         let stats = ["happiness", "energy", "fullness", "thirst"];
 
         for (let stat of stats) {
-            this.checkStat(stat);
+            if (this.stat[stat] <= 0) {
+                this.stat[stat] = 0;
+                this.changeStat("health", -2);
+            } else {
+                this.stat[stat] -= 5;
+            }
         }        
-    }
-
-    checkStat(stat) {
-        if (this[stat] <= 0) {
-            this[stat] = 0;
-            this.health -= 2;
-        } else {
-            this[stat] -= 5;
-        }
-
-        // console.log(stat, this[stat]);
     }
 
     updateState() {
@@ -65,7 +75,7 @@ class Animal {
 
     updateStatusBars() {
         for (let bar of statusBars) {
-            let value = this[bar.id]; // Get the respective status value.
+            let value = this.stat[bar.id]; // Get the respective status value.
             let pips = 10; // How many "pips" or "chunks" make up each bar?
             let activePips = Math.ceil(value / 100 * pips); // Convert the status value into a pip count.
             
