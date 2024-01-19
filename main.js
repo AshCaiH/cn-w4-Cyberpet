@@ -1,3 +1,34 @@
+// Background Music
+
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.loop = true;
+let isAudioInitialized = false;
+
+const toggleMusicButton = document.getElementById("toggleMusicButton");
+
+// Toggle Music
+
+const toggleMusic = () => {
+  if (!isAudioInitialized) {
+    bgMusic.volume = 0.01;
+    bgMusic.play();
+    isAudioInitialized = true;
+  }
+
+  if (bgMusic.volume > 0.01) {
+    bgMusic.volume = 0;
+    toggleMusicButton.classList.remove("fa-volume-high");
+    toggleMusicButton.classList.add("fa-volume-xmark");
+  } else {
+    bgMusic.volume = 1;
+    bgMusic.play();
+    toggleMusicButton.classList.remove("fa-volume-xmark");
+    toggleMusicButton.classList.add("fa-volume-high");
+  }
+};
+
+toggleMusicButton.addEventListener("click", toggleMusic);
+
 // Animal Classes
 
 class Animal {
