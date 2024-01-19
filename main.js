@@ -211,6 +211,8 @@ const startGame = () => {
 
 // Initialize Animal
 
+document.getElementById("animal-choice").selectedIndex = (Math.floor( Math.random() * 3));
+
 document.getElementById("animal-choice").addEventListener("change", (event) => {
     updateAnimalDisplay(event.target.value);
 });
