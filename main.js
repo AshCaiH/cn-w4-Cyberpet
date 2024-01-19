@@ -1,3 +1,34 @@
+// Background Music
+
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.loop = true;
+let isAudioInitialized = false;
+
+const toggleMusicButton = document.getElementById("toggleMusicButton");
+
+// Toggle Music
+
+const toggleMusic = () => {
+  if (!isAudioInitialized) {
+    bgMusic.volume = 0.01;
+    bgMusic.play();
+    isAudioInitialized = true;
+  }
+
+  if (bgMusic.volume > 0.01) {
+    bgMusic.volume = 0;
+    toggleMusicButton.classList.remove("fa-volume-high");
+    toggleMusicButton.classList.add("fa-volume-xmark");
+  } else {
+    bgMusic.volume = 1;
+    bgMusic.play();
+    toggleMusicButton.classList.remove("fa-volume-xmark");
+    toggleMusicButton.classList.add("fa-volume-high");
+  }
+};
+
+toggleMusicButton.addEventListener("click", toggleMusic);
+
 // Animal Classes
 let statusBars = document.getElementsByClassName("progress-bar");
 
@@ -117,8 +148,6 @@ class Monkey extends Animal {
 class Goose extends Animal {
     constructor (name) {
         super(name);
-        this.description = "This long-necked leaf lover looms loftily."
-        this.eats = "Leaves";
     }
 }
 
@@ -133,14 +162,14 @@ let animal = null;
 // Animal Type
 
 const createAnimal = (name, type) => {
-    switch (type) {
-        case "monkey":
-            return new monkey(name);
-        case "goose":
-            return new Goose(name);
-        case "turtle":
-            return new Turtle(name);
-    }
+  switch (type) {
+    case "monkey":
+      return new Monkey(name);
+    case "turtle":
+      return new Turtle(name);
+    case "goose":
+      return new Goose(name);
+  }
 };
 
 // Update Display

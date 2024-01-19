@@ -8,6 +8,9 @@
     <title>Tamagotchi</title>
   </head>
   <body>
+    <audio id="bgMusic" src="./sfx/theme.wav" loop></audio>
+
+    <i id="toggleMusicButton" class="fa-solid fa-volume-xmark"></i>
     <div class="tamagotchi-container">
       <div class="tamagotchi-screen">
         <div class="animal-selection">
@@ -16,8 +19,8 @@
           <label for="animal-choice">Choose your animal:</label>
           <select id="animal-choice">
             <option value="monkey">Monkey</option>
-            <option value="goose">Goose</option>
             <option value="turtle">Turtle</option>
+            <option value="goose">Goose</option>
           </select>
           <button id="start-button">Start</button>
         </div>
