@@ -8,33 +8,63 @@ let btn3 = document.getElementById("sleep-button");
 class Animal {
     constructor(name) {
         this.statuses = ["idle", "sleeping", "eating", "playing"]
-        this.health = 100;
-        this.happiness = 100;
-        this.energy = 100;
-        this.fullness = 100;
-        this.thirst = 100;
 
         this.description = "Whatever it is, it's definitely an animal.";
+
+        this.gameOver = false;
+        this.score = 0;
+
+        this.maxStat = {
+            health: 50,
+            happiness: 100,
+            energy: 100,
+            fullness: 100,
+            thirst: 100
+        }
+
+        this.stat = {
+            health: this.maxStat.health,
+            happiness: this.maxStat.happiness,
+            energy: this.maxStat.energy,
+            fullness: this.maxStat.fullness,
+            thirst: this.maxStat.thirst
+        }
+    }
+
+    changeStat(statName, value) {
+        let newValue = this.stat[statName] + value;
+        this.stat[statName] = Math.max(0, Math.min(newValue, this.maxStat[statName]));
     }
 
     feed() {
-        this.fullness += 10;
-        this.thirst += 3;
-        this.happiness += 5;
-        this.energy -= 2;
+        if (animal.gameOver) {
+            location.reload();
+            return;
+        }
+        this.changeStat("fullness", 10);
+        this.changeStat("thirst", 3);
+        this.changeStat("happiness", 5);
         this.updateStatusBars();
     }
   
     play() {
-        this.happiness += 10;
-        this.energy -= 5;
-        this.fullness -= 5;
+        if (animal.gameOver) {
+            location.reload();
+            return;
+        }
+        this.changeStat("happiness", 10);
+        this.changeStat("fullness", -5);
+        this.changeStat("energy", -5);
         this.updateStatusBars();
     }
 
     sleep () {
-        this.energy += 10;
-        this.fullness -= 5;
+        if (animal.gameOver) {
+            location.reload();
+            return;
+        }
+        this.changeStat("energy", 15);
+        this.changeStat("fullness", -5);
         this.updateStatusBars();
     }
 
@@ -42,32 +72,35 @@ class Animal {
         let stats = ["happiness", "energy", "fullness", "thirst"];
 
         for (let stat of stats) {
-            this.checkStat(stat);
+            if (this.stat[stat] <= 0) {
+                this.stat[stat] = 0;
+                this.changeStat("health", -2);
+            } else {
+                this.stat[stat] -= 5;
+            }
         }        
     }
 
-    checkStat(stat) {
-        if (this[stat] <= 0) {
-            this[stat] = 0;
-            this.health -= 2;
-        } else {
-            this[stat] -= 5;
-        }
-
-        // console.log(stat, this[stat]);
-    }
-
     updateState() {
+        this.score += 1;
         this.damageOverTime();
         this.updateStatusBars();
-        setTimeout(this.updateState.bind(this),1000);
+
+        if (this.stat.health <= 0 ) {
+
+            animal.gameOver = true;
+            document.querySelector(".game-over-text").textContent = `After lasting ${animal.score} seconds, your zoo has been closed and your one animal has been taken into protective custody.`
+            document.getElementById("game-over").classList.remove("hidden");
+            document.querySelector(".status-bars").classList.add("hidden");
+
+        } else setTimeout(this.updateState.bind(this),1000);
     }
 
     updateStatusBars() {
         for (let bar of statusBars) {
-            let value = this[bar.id]; // Get the respective status value.
+            let value = this.stat[bar.id]; // Get the respective status value.
             let pips = 10; // How many "pips" or "chunks" make up each bar?
-            let activePips = Math.ceil(value / 100 * pips); // Convert the status value into a pip count.
+            let activePips = Math.ceil(value / this.maxStat[bar.id] * pips); // Convert the status value into a pip count.
             
             let maxWidth = bar.style.maxWidth; // TODO: Replace this with numbers sourced from DOM.
             bar.style.width = Math.ceil(75 / pips * activePips) + "px"; // Status bar matches respective value, snapping to pips.
@@ -81,17 +114,11 @@ class Cat extends Animal {
     }
 }
 
-class Giraffe extends Animal {
+class Goose extends Animal {
     constructor (name) {
         super(name);
         this.description = "This long-necked leaf lover looms loftily."
         this.eats = "Leaves";
-    }
-}
-
-class Dog extends Animal {
-    constructor(name) {
-        super(name);
     }
 }
 
@@ -109,8 +136,8 @@ const createAnimal = (name, type) => {
     switch (type) {
         case "cat":
             return new Cat(name);
-        case "dog":
-            return new Dog(name);
+        case "goose":
+            return new Goose(name);
         case "turtle":
             return new Turtle(name);
     }
@@ -165,4 +192,3 @@ document.addEventListener("DOMContentLoaded", () => {
     updateAnimalDisplay(document.getElementById("animal-choice").value);
 });
 
-// Replace this with non-hardcoded values later
